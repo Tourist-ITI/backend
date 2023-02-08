@@ -1,7 +1,7 @@
 //core modules
 const mongoose = require("mongoose");
 
-//varibles
+//variables
 const { Schema } = mongoose;
 
 const userSchema = new Schema({
