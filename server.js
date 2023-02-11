@@ -5,6 +5,9 @@ const morgan = require("morgan");
 const dotenv = require("dotenv");
 const cors = require("cors");
 
+//custom modules
+const authRouter = require("./routers/auth/user");
+
 //handle dotenv
 dotenv.config({
   path: "./config.env",
@@ -18,6 +21,7 @@ const app = express();
 app.use(express.json());
 app.use(morgan("dev"));
 app.use(cors());
+app.use("/v1/users", authRouter);
 
 //database server
 mongoose.connect(process.env.DATABASE).then((_) => {
@@ -25,7 +29,7 @@ mongoose.connect(process.env.DATABASE).then((_) => {
 });
 
 app.use((err, req, res, next) => {
-  console.log(err);
+  console.log("<<<<Error>>>>", err);
   res.status(err.status || 500).send(err.response);
 });
 
