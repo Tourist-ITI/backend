@@ -1,5 +1,4 @@
 // core modules
-const { number } = require("joi");
 const mongoose = require("mongoose");
 
 const { Schema } = mongoose;
@@ -24,31 +23,17 @@ const userSchema = new Schema(
       type: String,
       required: true,
     },
-    ssn: {
-      type: String,
-    },
-    photo: {
-      type: String,
-    },
+    ssn: String,
+    photo: String,
     role: {
       type: String,
       required: true,
     },
-    favorite_organizer: {
-      type: Array,
-    },
-    visited_tours: {
-      type: Array,
-    },
-    payment_method: {
-      type: Array,
-    },
-    cash: {
-      type: number,
-    },
-    currency: {
-      type: String,
-    },
+    favorite_organizer: Array,
+    visited_tours: Array,
+    payment_method: Array,
+    cash: Number,
+    currency: String,
     created_at: {
       type: Date,
       default: Date.now(),

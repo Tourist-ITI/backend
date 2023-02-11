@@ -1,13 +1,12 @@
 // cor module
+const { array } = require("joi");
 const mongoose = require("mongoose");
 
 const { Schema } = mongoose;
 
 const tourSchema = new Schema(
   {
-    title: {
-      type: String,
-    },
+    title: String,
     organizer: {
       type: Schema.Types.ObjectId,
       ref: "User",
@@ -17,15 +16,11 @@ const tourSchema = new Schema(
     },
     expected_photos: { type: Array },
 
-    start_date: {
-      type: Date,
-    },
-    duration: {
-      type: Number,
-    },
-    person_cost: {
-      type: Number,
-    },
+    start_date: Date,
+
+    duration: Number,
+    person_cost: Number,
+
     person_num: {
       type: Number,
     },
@@ -57,7 +52,7 @@ const tourSchema = new Schema(
       magical_storytelling: String,
       special_treat: String,
     },
-    coordinates: { type: "Point", coordinates: [longitude, latitude] },
+    coordinates: Array,
   },
   {
     toJSON: { virtual: true },
