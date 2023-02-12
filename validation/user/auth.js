@@ -7,7 +7,7 @@ const signupSchema = joi.object({
   username: joi.string().alphanum().min(3).required(),
   email: joi.string().email().required(),
   phone: joi.string().min(11).required(),
-  password: joi.string().required(),
+  password: joi.string().required().min(6),
   ssn: joi.number(),
   confirm_password: joi
     .any()
