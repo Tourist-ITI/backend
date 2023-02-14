@@ -22,6 +22,7 @@ const comparePassword = async (password, hash) => {
 
 const signUserToken = async (id) =>
   await signAsync({ id }, process.env.JWT_SECRET);
+
 const protect = async (req, res, next) => {
   try {
     let token;

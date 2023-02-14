@@ -18,9 +18,9 @@ const port = 3001;
 const app = express();
 
 //middleware
+app.use(cors());
 app.use(express.json());
 app.use(morgan("dev"));
-app.use(cors());
 app.use("/v1/users", authRouter);
 
 //database server
