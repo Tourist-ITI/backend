@@ -1,5 +1,4 @@
 // cor module
-const { array } = require("joi");
 const mongoose = require("mongoose");
 
 const { Schema } = mongoose;
@@ -15,12 +14,9 @@ const tourSchema = new Schema(
       type: Array,
     },
     expected_photos: { type: Array },
-
     start_date: Date,
-
     duration: Number,
     person_cost: Number,
-
     person_num: {
       type: Number,
     },

@@ -12,23 +12,15 @@ function errorHandler(error = "Something went wrong", status = 500) {
 // function to handle success
 function successHandler(
   res,
-  data,
+  data = [],
   message = "Data retrieved successfully",
   status = 200
 ) {
-  res.status(status).send({
+  res.status(status).json({
     success: true,
     message,
     data,
   });
-  // return {
-  //   status,
-  //   response: {
-  //     success: true,
-  //     message,
-  //     data,
-  //   },
-  // };
 }
 
 module.exports = {

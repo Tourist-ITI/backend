@@ -16,7 +16,7 @@ const hashPassword = async (password) =>
 const comparePassword = async (password, hash) => {
   const isCorrectPassword = await bcrypt.compare(password, hash);
   if (!isCorrectPassword) {
-    throw errorHandler("username or password is invalid");
+    throw errorHandler("username or password is invalid", 401);
   }
 };
 
@@ -46,8 +46,15 @@ const protect = async (req, res, next) => {
     if (!validUser) throw err;
 
     req.userID = decoded.id;
+    next();
   } catch (err) {
     next(errorHandler(err.message ?? "unauthorized", 401));
+  }
+};
+const isAdmin = async (id) => {
+  const user = await userModel.findById(id);
+  if (user.role !== "admin") {
+    throw errorHandler("admins only can create tour");
   }
 };
 
@@ -56,4 +63,5 @@ module.exports = {
   hashPassword,
   signUserToken,
   comparePassword,
+  isAdmin,
 };

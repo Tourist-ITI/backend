@@ -18,7 +18,8 @@ exports.signUp = async (req, res, next) => {
     const checkedUser = await userModel.findOne({ email });
     if (checkedUser) {
       throw errorHandler(
-        "email is already exist try different email or sign in"
+        "email is already exist try different email or sign in",
+        400
       );
     }
     // hash password

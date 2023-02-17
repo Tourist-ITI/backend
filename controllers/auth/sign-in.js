@@ -11,7 +11,7 @@ const signIn = async (req, res, next) => {
     const user = await userModel.findOne({ email });
 
     if (!user) {
-      throw errorHandler("user not found please sign up");
+      throw errorHandler("user not found please sign up", 404);
     }
 
     await comparePassword(password, user.password);
