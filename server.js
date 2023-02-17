@@ -48,7 +48,7 @@ mongoose.connect(process.env.DATABASE).then((_) => {
 });
 
 app.use((err, req, res, next) => {
-  console.log("<<<<Error>>>>", err);
+  console.log("\n<<<<<<<<<<<<<<Error>>>>>>>>>>>>>>\n", err);
   res.status(err.status || 500).send(err.response);
 });
 

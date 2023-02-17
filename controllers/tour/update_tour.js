@@ -9,14 +9,15 @@ exports.updateTour = async (req, res, next) => {
     const { id } = req.params;
 
     const getTour = await tourModel.findById(id);
-    const user = await userModel.findById(getTour.organizer);
+    if (!getTour) {
+      throw errorHandler("invalid tour id", 400);
+    }
+    const user = await userModel.findById(getTour?.organizer);
 
     if (!user || req.userID !== user.id)
       throw errorHandler("unauthorized", 401);
 
     await isAdmin(req.userID);
-
-    // if images not change
 
     const handleData = {
       ...req.body,
@@ -33,7 +34,6 @@ exports.updateTour = async (req, res, next) => {
       },
     };
 
-    console.log(handleData);
     const tour = new tourModel(handleData);
 
     await tourModel.create(handleData);

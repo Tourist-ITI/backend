@@ -1,3 +1,7 @@
+const {
+  uploadCloud,
+  cloudUploadImages,
+} = require("../../middlewares/cloudinary/cloudinary");
 const { tourModel } = require("../../models/index");
 const { errorHandler, successHandler } = require("../../utils/responseHandler");
 const { imageMapping, stringToArray } = require("../../utils/utils");
@@ -14,9 +18,9 @@ exports.createTour = async (req, res, next) => {
 
     const handleData = {
       ...req.body,
+      photos: await cloudUploadImages(photos),
+      expected_photos: await cloudUploadImages(expected_photos),
       organizer: req.userID,
-      expected_photos: imageMapping(expected_photos),
-      photos: imageMapping(photos),
       reasons: stringToArray(req.body.reasons),
       coordinates: stringToArray(req.body.coordinates),
       plan: {
