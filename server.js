@@ -37,7 +37,7 @@ app.use(morgan("dev"));
 app.use("/v1/users", authRouter);
 app.use("/v1/tours", tourRouter);
 
-// roue not exist
+// route not exist
 app.all("*", (req, res, next) => {
   next(errorHandler(`can't found route: ${req.originalUrl}`, 404));
 });
