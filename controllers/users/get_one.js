@@ -1,10 +1,12 @@
 const { userModel:User } = require("../../models");
-
+const { successHandler,errorHandler } = require("../../utils/responseHandler");
 exports.getOneUser = async (req, res, next) => {
   try {
+    
     const user = await User.findById(req.params.id)
-    if (!user){res.status(404).send('user not found')}
-    else{res.status(200).json(user)}
+    console.log(user);
+    if (!user){throw errorHandler('user not found',404)}
+    else{successHandler(res,user)}
   } catch (err) {
     next(err);
   }
