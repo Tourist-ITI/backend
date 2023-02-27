@@ -34,8 +34,8 @@ tourRouter.put(
   validTour,
   updateTour
 );
-tourRouter.get("/:id", protect, getOneTour);
+tourRouter.get("/:id", getOneTour);
+tourRouter.get("/", getAllTours);
 tourRouter.delete("/:id", protect, deleteOneTour);
-tourRouter.get("/", protect, getAllTours);
 
 module.exports = tourRouter;
