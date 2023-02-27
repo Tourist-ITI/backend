@@ -12,6 +12,7 @@ const bodyParser = require("body-parser");
 //custom modules
 const authRouter = require("./routers/auth/user");
 const tourRouter = require("./routers/tour/tour");
+const commentsRouter = require("./routers/comment/comment");
 const { errorHandler } = require("./utils/responseHandler");
 
 //handle dotenv
@@ -36,6 +37,7 @@ app.use(morgan("dev"));
 // routes
 app.use("/v1/users", authRouter);
 app.use("/v1/tours", tourRouter);
+app.use("/v1/comments", commentsRouter);
 
 // route not exist
 app.all("*", (req, res, next) => {
