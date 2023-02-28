@@ -20,6 +20,15 @@ const tourSchema = new Schema(
     person_num: {
       type: Number,
     },
+    status: {
+      type: String,
+      enum: {
+        values: ["complete", "incomplete"],
+        message: ["difficulty is either : complete, incomplete"],
+      },
+      default: "incomplete",
+    },
+    reservation_number: Number,
     location: {
       type: String,
     },
@@ -41,6 +50,7 @@ const tourSchema = new Schema(
     reasons: {
       type: Array,
     },
+
     plan: {
       meeting_point: String,
       city_highlights: String,

@@ -22,7 +22,7 @@ const userSchema = new Schema(
     password: {
       type: String,
       required: true,
-      select: false
+      select: false,
     },
     ssn: String,
     photo: String,
@@ -34,6 +34,7 @@ const userSchema = new Schema(
     visited_tours: Array,
     payment_method: Array,
     cash: Number,
+    bio: String,
     currency: String,
     created_at: {
       type: Date,
