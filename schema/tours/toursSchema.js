@@ -1,4 +1,4 @@
-// cor module
+// core module
 const mongoose = require("mongoose");
 
 const { Schema } = mongoose;
@@ -49,6 +49,7 @@ const tourSchema = new Schema(
       special_treat: String,
     },
     coordinates: Array,
+    comments: [{ type: Schema.Types.ObjectId, ref: "Comment" }],
   },
   {
     toJSON: { virtual: true },

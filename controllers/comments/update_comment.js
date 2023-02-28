@@ -11,16 +11,14 @@ exports.updateComment = async (req, res, next) => {
       throw errorHandler("comment not found", 404);
     }
     const post = await Post.findById(comment.post_id);
-    if (
-      comment.user_id !== res.locals.userID ||
-      post.organizer !== res.locals.userID
-    ) {
+    if (comment.user_id !== res.locals.userID) {
       throw errorHandler("unauthorized", 401);
     }
     const handleData = {
       ...req.body,
       title: req.body.title,
       content: req.body.content,
+      rating: req.body.rating,
       user_id: req.body.user_id,
       post_id: req.body.post_id,
     };
