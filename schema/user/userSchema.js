@@ -22,14 +22,17 @@ const userSchema = new Schema(
     password: {
       type: String,
       required: true,
-      select: false
+      select: false,
     },
     ssn: String,
     photo: String,
+    cover_photo: String,
     role: {
       type: String,
       required: true,
     },
+    bio: String,
+    city: String,
     favorite_organizer: Array,
     visited_tours: Array,
     payment_method: Array,

@@ -14,9 +14,9 @@ const { authMW } = require("../../middlewares/authMiddleware");
 const commentRouter = express.Router();
 
 commentRouter.post("/", protect, createComment);
-commentRouter.put("/:id", protect, updateComment);
+commentRouter.put("/:id/user_id", protect, updateComment);
 commentRouter.get("/:id/user_id", protect, getOneComment);
-commentRouter.delete("/:id", protect, authMW, deleteOneComment);
+commentRouter.delete("/:id/user_id", protect, authMW, deleteOneComment);
 commentRouter.get("/:id", protect, getAllComments);
 
 module.exports = commentRouter;

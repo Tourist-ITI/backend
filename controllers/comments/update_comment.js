@@ -6,7 +6,10 @@ const { isAdmin } = require("../auth/auth");
 exports.updateComment = async (req, res, next) => {
   try {
     //    await isAdmin(req.userID);
-    const comment = await Comment.findById(req.params.id);
+    const comment = await Comment.find({
+      post_id: req.params.id,
+      user_id: req.params.user_id,
+    });
     if (!comment) {
       throw errorHandler("comment not found", 404);
     }
