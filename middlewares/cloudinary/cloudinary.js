@@ -1,11 +1,13 @@
 const fs = require("fs");
 const cloudinary = require("cloudinary").v2;
+const dotenv = require("dotenv");
+dotenv.config();
 
 // Configuration
 cloudinary.config({
-  cloud_name: "dykh961g7",
-  api_key: "168819213622196",
-  api_secret: "rAo4T-_lAqq6lufeyRGnp5BlVSU",
+  cloud_name: process.env.CLOUD_NAME,
+  api_key: process.env.API_KEY,
+  api_secret: process.env.API_SECRET,
 });
 
 // Upload

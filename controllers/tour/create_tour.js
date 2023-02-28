@@ -13,8 +13,11 @@ exports.createTour = async (req, res, next) => {
     // console.log(req.body);
     // console.log(req.files);
     // console.log(req.userID);
-    console.log(expected_photos);
-    console.log(photos);
+
+
+    console.log(expected_photos, photos);
+    console.log(req.files);
+
     await isAdmin(req.userID);
 
     const handleData = {
