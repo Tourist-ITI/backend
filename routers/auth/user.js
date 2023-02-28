@@ -5,10 +5,12 @@ const { signUp } = require("../../controllers/auth/sign-up");
 const { signIn } = require("../../controllers/auth/sign-in");
 
 const { signupValid, signinValid } = require("../../validation/user/auth");
+const { confirmEmail } = require("../../controllers/auth/confirm_email");
 
 const authRouter = express.Router();
 
 authRouter.post("/sign-up/:role", signupValid, signUp);
 authRouter.post("/sign-in/:role", signinValid, signIn);
+// authRouter.get("/send-email", confirmEmail);
 
 module.exports = authRouter;
