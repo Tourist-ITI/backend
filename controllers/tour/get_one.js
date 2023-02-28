@@ -1,3 +1,4 @@
+
 const { tourModel: Tour } = require("../../models");
 const { successHandler, errorHandler } = require("../../utils/responseHandler");
 
@@ -10,6 +11,7 @@ exports.getOneTour = async (req, res, next) => {
       throw errorHandler("tour not found", 404);
     }
     successHandler(res, tour);
+
   } catch (err) {
     next(err);
   }

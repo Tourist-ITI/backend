@@ -1,3 +1,4 @@
+
 const { tourModel: Tour } = require("../../models");
 const { successHandler, errorHandler } = require("../../utils/responseHandler");
 
@@ -12,6 +13,7 @@ exports.deleteOneTour = async (req, res, next) => {
     }
     await Tour.deleteOne({ id: req.params.id });
     successHandler(res, tour, "tour deleted successfully");
+
   } catch (err) {
     next(err);
   }

@@ -1,8 +1,11 @@
+
 const { tourModel: Tour } = require("../../models");
 const { successHandler, errorHandler } = require("../../utils/responseHandler");
 
+
 exports.getAllTours = async (req, res, next) => {
   try {
+
     const { location, all } = req.query;
 
     let tours;
@@ -20,6 +23,7 @@ exports.getAllTours = async (req, res, next) => {
     }
 
     successHandler(res, tours);
+
   } catch (err) {
     next(err);
   }
