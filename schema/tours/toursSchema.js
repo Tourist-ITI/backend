@@ -50,7 +50,6 @@ const tourSchema = new Schema(
     reasons: {
       type: Array,
     },
-
     plan: {
       meeting_point: String,
       city_highlights: String,

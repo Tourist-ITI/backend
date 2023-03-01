@@ -8,7 +8,7 @@ const signIn = async (req, res, next) => {
     const { role } = req.params;
 
     // check if user exist
-    const user = await userModel.findOne({ email });
+    const user = await userModel.findOne({ email }).select("password");
 
     if (!user) {
       throw errorHandler("user not found please sign up", 404);
