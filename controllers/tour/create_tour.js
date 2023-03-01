@@ -11,9 +11,8 @@ exports.createTour = async (req, res, next) => {
   try {
     const { expected_photos, photos } = req.files;
     // console.log(req.body);
-    // console.log(req.files);
+    //console.log(req.files);
     // console.log(req.userID);
-
 
     console.log(expected_photos, photos);
     console.log(req.files);
@@ -26,7 +25,7 @@ exports.createTour = async (req, res, next) => {
       expected_photos: await cloudUploadImages(expected_photos),
       organizer: req.userID,
       reasons: stringToArray(req.body.reasons),
-      coordinates: stringToArray(req.body.coordinates),
+      // coordinates: stringToArray(req.body.coordinates),
       plan: {
         meeting_point: req.body.meeting_point,
         city_highlights: req.body.city_highlights,

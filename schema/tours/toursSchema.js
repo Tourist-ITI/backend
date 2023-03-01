@@ -57,8 +57,9 @@ const tourSchema = new Schema(
       magical_storytelling: String,
       special_treat: String,
     },
-    coordinates: Array,
+
     comments: [{ type: Schema.Types.ObjectId, ref: "Comment" }],
+
   },
   {
     toJSON: { virtual: true },
