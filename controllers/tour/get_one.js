@@ -3,6 +3,7 @@ const { successHandler, errorHandler } = require("../../utils/responseHandler");
 
 exports.getOneTour = async (req, res, next) => {
   try {
+    console.log("pew");
     const tour = await Tour.findById(req.params.id).populate("organizer");
 
     if (!tour) {
