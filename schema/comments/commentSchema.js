@@ -6,6 +6,7 @@ const commentSchema = new Schema(
   {
     title: String,
     content: String,
+    rating:Number,
     user_id: {
       type: Schema.Types.ObjectId,
       ref: "User",

@@ -12,7 +12,9 @@ const bodyParser = require("body-parser");
 //custom modules
 const authRouter = require("./routers/auth/user");
 const tourRouter = require("./routers/tour/tour");
+const commentsRouter = require("./routers/comment/comment");
 const bookingRouter = require("./routers/booking/booking");
+
 const { errorHandler } = require("./utils/responseHandler");
 
 //handle dotenv
@@ -35,7 +37,12 @@ app.use(morgan("dev"));
 // routes
 app.use("/v1/users", authRouter);
 app.use("/v1/tours", tourRouter);
+
+app.use("/v1/comments", commentsRouter);
+
+
 app.use("/v1", bookingRouter);
+
 // route not exist
 app.all("*", (req, res, next) => {
   next(errorHandler(`can't found route: ${req.originalUrl}`, 404));
