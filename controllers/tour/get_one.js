@@ -1,10 +1,11 @@
-const { tourModel: Tour } = require("../../models");
+const { tourModel: Tour , commentModel:Comment } = require("../../models");
+
 const { successHandler, errorHandler } = require("../../utils/responseHandler");
 
 exports.getOneTour = async (req, res, next) => {
   try {
-    console.log("pew");
     const tour = await Tour.findById(req.params.id).populate("organizer");
+    console.log(tour);
 
     if (!tour) {
       throw errorHandler("tour not found", 404);
