@@ -6,28 +6,24 @@ const { isAdmin } = require("../auth/auth");
 exports.updateComment = async (req, res, next) => {
   try {
     //    await isAdmin(req.userID);
-    const comment = await Comment.find({
-      post_id: req.params.id,
-      user_id: req.params.user_id,
-    });
+    console.log(req.params);
+    const comment = await Comment.findOne({ id: req.params.commentID })
+      .populate("tour")
+      .populate("user");
     if (!comment) {
       throw errorHandler("comment not found", 404);
     }
-    const post = await Post.findById(comment.post_id);
-    if (comment.user_id !== res.locals.userID) {
+    if (comment.user.id !== req.userID) {
       throw errorHandler("unauthorized", 401);
     }
     const handleData = {
-      ...req.body,
       title: req.body.title,
       content: req.body.content,
       rating: req.body.rating,
-      user_id: req.body.user_id,
-      post_id: req.body.post_id,
     };
     const editedComment = new Comment(handleData);
 
-    await Comment.create(handleData);
+    await Comment.updateOne({ id: req.params.commentID }, handleData);
 
     successHandler(res, editedComment, "comment updated successfully");
   } catch (err) {

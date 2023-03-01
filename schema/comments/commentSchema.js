@@ -6,15 +6,15 @@ const commentSchema = new Schema(
   {
     title: String,
     content: String,
-    rating:Number,
-    user_id: {
+    rating: Number,
+    user: {
       type: Schema.Types.ObjectId,
       ref: "User",
       require: true,
     },
-    post_id: {
+    tour: {
       type: Schema.Types.ObjectId,
-      ref: "Post",
+      ref: "Tour",
       require: true,
     },
     created_at: {

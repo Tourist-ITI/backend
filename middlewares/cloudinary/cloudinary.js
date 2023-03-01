@@ -14,7 +14,6 @@ cloudinary.config({
 exports.uploadCloud = async (file) => {
   const result = await cloudinary.uploader.upload(file);
   if (result) {
-    console.log(result);
     fs.unlinkSync(`uploads/${result.original_filename}.${result.format}`);
     return { url: result.url, public_id: result.public_id };
   }

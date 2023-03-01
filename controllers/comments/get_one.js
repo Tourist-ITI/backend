@@ -6,7 +6,9 @@ exports.getOneComment = async (req, res, next) => {
     const comment = await Comment.find({
       post_id: req.params.id,
       user_id: req.params.user_id,
-    });
+    })
+      .populate("tour")
+      .populate("user");
     if (!comment) {
       throw errorHandler("comment not found", 404);
     }
