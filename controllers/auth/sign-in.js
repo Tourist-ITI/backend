@@ -9,18 +9,23 @@ const signIn = async (req, res, next) => {
 
     // check if user exist
     const user = await userModel.findOne({ email }).select("password");
-
+    const userBody = await userModel.findOne({ email });
     if (!user) {
       throw errorHandler("user not found please sign up", 404);
     }
-
+    if (role !== userBody.role) {
+      throw errorHandler("user not found please sign up", 404);
+    }
     await comparePassword(password, user.password);
 
     const access_token = await signUserToken(user.id);
 
     successHandler(
       res,
-      { id: user.id, username: user.username, access_token, role },
+      {
+        access_token,
+        userBody,
+      },
       "login successfully"
     );
   } catch (err) {

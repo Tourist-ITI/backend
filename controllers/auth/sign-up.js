@@ -26,6 +26,7 @@ exports.signUp = async (req, res, next) => {
     const pass = await hashPassword(password);
 
     // create new user
+
     await userModel.create({ ...req.body, password: pass, role });
 
     //get the user
@@ -37,9 +38,8 @@ exports.signUp = async (req, res, next) => {
     console.log(access_token);
     // handle response
     successHandler(res, {
-      id: newUser.id,
-      username: newUser.username,
       access_token,
+      user: newUser,
     });
   } catch (err) {
     next(err);

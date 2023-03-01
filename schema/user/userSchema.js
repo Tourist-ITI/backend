@@ -29,7 +29,10 @@ const userSchema = new Schema(
       select: false,
     },
     ssn: String,
-    photo: String,
+    photo: {
+      type: String,
+      default: "",
+    },
     cover_photo: String,
     role: {
       type: String,
@@ -37,9 +40,7 @@ const userSchema = new Schema(
     },
     bio: String,
     city: String,
-    favorite_organizer: Array,
     visited_tours: Array,
-    payment_method: Array,
     cash: Number,
     bio: String,
     currency: String,
