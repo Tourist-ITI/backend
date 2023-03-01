@@ -4,6 +4,7 @@ const { successHandler, errorHandler } = require("../../utils/responseHandler");
 exports.getOneTour = async (req, res, next) => {
   try {
     const tour = await Tour.findById(req.params.id).populate("organizer");
+
     if (!tour) {
       throw errorHandler("tour not found", 404);
     }
@@ -26,6 +27,7 @@ exports.getOneTour = async (req, res, next) => {
       });
     });
     successHandler(res, tour);
+
   } catch (err) {
     next(err);
   }

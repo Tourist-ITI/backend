@@ -13,6 +13,10 @@ const userSchema = new Schema(
       type: String,
       required: true,
     },
+    cart: {
+      type: Schema.Types.ObjectId,
+      ref: "Cart",
+    },
     email: {
       type: String,
       unique: true,
@@ -37,6 +41,7 @@ const userSchema = new Schema(
     visited_tours: Array,
     payment_method: Array,
     cash: Number,
+    bio: String,
     currency: String,
     created_at: {
       type: Date,

@@ -16,6 +16,7 @@ const authRouter = express.Router();
 
 authRouter.post("/sign-up/:role", signupValid, signUp);
 authRouter.post("/sign-in/:role", signinValid, signIn);
+// authRouter.get("/send-email", confirmEmail);
 authRouter.get("/:id", getOneUser);
 authRouter.post(
   "/:id",

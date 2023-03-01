@@ -46,6 +46,7 @@ const protect = async (req, res, next) => {
     if (!validUser) throw err;
 
     req.userID = decoded.id;
+    req.user = validUser;
     next();
   } catch (err) {
     next(errorHandler(err.message ?? "unauthorized", 401));
