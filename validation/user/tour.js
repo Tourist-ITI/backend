@@ -14,7 +14,7 @@ const tourSchema = joi.object({
   carbon_neut: joi.bool().required(),
   include: joi.string().required(),
   reasons: joi.string().required(),
-  coordinates: joi.string().required(),
+  // coordinates: joi.string().required(),
   meeting_point: joi.string().alphanum().required(),
   city_highlights: joi.string().alphanum().required(),
   hidden_gems: joi.string().alphanum().required(),

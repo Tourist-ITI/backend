@@ -57,7 +57,7 @@ const tourSchema = new Schema(
       magical_storytelling: String,
       special_treat: String,
     },
-    coordinates: Array,
+    // coordinates: Array,
   },
   {
     toJSON: { virtual: true },
