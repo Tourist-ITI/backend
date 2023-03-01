@@ -1,4 +1,3 @@
-
 const { tourModel: Tour } = require("../../models");
 const { successHandler, errorHandler } = require("../../utils/responseHandler");
 
