@@ -13,7 +13,7 @@ const tourSchema = joi.object({
   walk: joi.bool().required(),
   carbon_neut: joi.bool().required(),
   include: joi.string().required(),
-  reasons: joi.string().required(),
+  reasons: joi.array().required(),
   // coordinates: joi.string().required(),
   meeting_point: joi.string().alphanum().required(),
   city_highlights: joi.string().alphanum().required(),
