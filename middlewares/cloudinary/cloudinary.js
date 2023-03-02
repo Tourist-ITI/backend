@@ -16,7 +16,6 @@ exports.uploadCloud = async (file) => {
   try {
     const result = await cloudinary.uploader.upload(file);
     if (result) {
-      console.log("xx", result);
       // fs.unlinkSync(file);
       fs.unlink(file, function (err) {
         if (err) {

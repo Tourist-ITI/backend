@@ -14,11 +14,11 @@ const tourSchema = joi.object({
   carbon_neut: joi.bool().required(),
   include: joi.string().required(),
   reasons: joi.array().required(),
-  meeting_point: joi.string().alphanum().required(),
-  city_highlights: joi.string().alphanum().required(),
-  hidden_gems: joi.string().alphanum().required(),
-  magical_storytelling: joi.string().alphanum().required(),
-  special_treat: joi.string().alphanum().required(),
+  meeting_point: joi.string().required(),
+  city_highlights: joi.string().required(),
+  hidden_gems: joi.string().required(),
+  magical_storytelling: joi.string().required(),
+  special_treat: joi.string().required(),
 });
 
 const validTour = async (req, res, next) => {

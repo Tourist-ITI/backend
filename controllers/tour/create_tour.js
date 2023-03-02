@@ -1,5 +1,4 @@
 const {
-  uploadCloud,
   cloudUploadImages,
 } = require("../../middlewares/cloudinary/cloudinary");
 const { tourModel } = require("../../models/index");
