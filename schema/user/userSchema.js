@@ -7,11 +7,9 @@ const userSchema = new Schema(
   {
     username: {
       type: String,
-      required: true,
     },
     phone: {
       type: String,
-      required: true,
     },
     cart: {
       type: Schema.Types.ObjectId,
@@ -21,11 +19,9 @@ const userSchema = new Schema(
       type: String,
       unique: true,
       lowercase: true,
-      required: true,
     },
     password: {
       type: String,
-      required: true,
       select: false,
     },
     ssn: String,
@@ -36,13 +32,11 @@ const userSchema = new Schema(
     cover_photo: String,
     role: {
       type: String,
-      required: true,
     },
     bio: String,
     city: String,
     visited_tours: Array,
     cash: Number,
-    bio: String,
     currency: String,
     created_at: {
       type: Date,

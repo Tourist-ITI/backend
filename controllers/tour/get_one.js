@@ -1,5 +1,4 @@
-const { tourModel: Tour , commentModel:Comment } = require("../../models");
-
+const { tourModel: Tour, commentModel: Comment } = require("../../models");
 const { successHandler, errorHandler } = require("../../utils/responseHandler");
 
 exports.getOneTour = async (req, res, next) => {
@@ -29,7 +28,6 @@ exports.getOneTour = async (req, res, next) => {
       });
     });
     successHandler(res, tour);
-
   } catch (err) {
     next(err);
   }

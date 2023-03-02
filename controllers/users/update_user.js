@@ -4,14 +4,13 @@ const { imageMapping } = require("../../utils/utils");
 
 exports.updateUser = async (req, res, next) => {
   try {
-    const getUser = await userModel.findById(id);
+    const getUser = await userModel.findById(req.params.id);
     if (req.userID !== getUser.id) throw errorHandler("unauthorized", 401);
 
     const handleData = {
-      ...req.body,
       username: req.body.username,
-      photo: imageMapping(photo),
-      cover_photo: imageMapping(cover_photo),
+      // photo: req.body.photo,
+      // cover_photo: req.body.cover_photo,
       phone: req.body.phone,
       bio: req.body.bio,
       city: req.body.city,

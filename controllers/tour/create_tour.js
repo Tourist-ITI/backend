@@ -24,7 +24,7 @@ exports.createTour = async (req, res, next) => {
       photos: await cloudUploadImages(photos),
       expected_photos: await cloudUploadImages(expected_photos),
       organizer: req.userID,
-      reasons: stringToArray(req.body.reasons),
+      reasons: req.body.reasons,
       // coordinates: stringToArray(req.body.coordinates),
       plan: {
         meeting_point: req.body.meeting_point,

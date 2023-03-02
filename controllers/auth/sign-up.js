@@ -35,7 +35,6 @@ exports.signUp = async (req, res, next) => {
     //add access token
     const access_token = await signUserToken(newUser.id);
 
-    console.log(access_token);
     // handle response
     successHandler(res, {
       access_token,

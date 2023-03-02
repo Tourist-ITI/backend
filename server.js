@@ -11,9 +11,11 @@ const bodyParser = require("body-parser");
 
 //custom modules
 const authRouter = require("./routers/auth/user");
+const userRouter = require("./routers/user/user");
 const tourRouter = require("./routers/tour/tour");
 const commentsRouter = require("./routers/comment/comment");
 const bookingRouter = require("./routers/booking/booking");
+//const cartRouter = require("./routers/cart/cart");
 
 const { errorHandler } = require("./utils/responseHandler");
 
@@ -37,9 +39,9 @@ app.use(morgan("dev"));
 // routes
 app.use("/v1/users", authRouter);
 app.use("/v1/tours", tourRouter);
-
+app.use("/v1/user/profile", userRouter);
 app.use("/v1/comments", commentsRouter);
-
+//app.use("/v1/cart", cartRouter);
 
 app.use("/v1", bookingRouter);
 
