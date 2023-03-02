@@ -44,7 +44,13 @@ exports.uploadMultiImages = (arrayOfFields) => upload.fields(arrayOfFields);
 const sharpHandler = async (buffer, id) => {
   const uniqueNumber = Date.now();
   await sharp(buffer)
-    .resize(500, 500, { fit: "cover" })
+    .resize({
+      width: 600,
+      height: 400,
+      fit: "contain",
+      background: { r: 255, g: 255, b: 255, alpha: 0.5 },
+    })
+    .flatten({ background: "#fff" })
     .toFormat("jpeg")
     .webp({ quality: 90 })
     .toFile(`uploads/user-${id}-${uniqueNumber}.jpeg`);
