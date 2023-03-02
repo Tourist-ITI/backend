@@ -40,7 +40,6 @@ app.use("/v1/tours", tourRouter);
 
 app.use("/v1/comments", commentsRouter);
 
-
 app.use("/v1", bookingRouter);
 
 // route not exist
