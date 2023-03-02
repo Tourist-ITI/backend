@@ -12,7 +12,6 @@ exports.getCheckoutSession = async (req, res, next) => {
     if (!tour) {
       throw errorHandler("tour id not found", 400);
     }
-    console.log("xxxxxxxxxxxxxxxxxxxxxxxxxxx", tour);
     if (tour.person_num - tour.reservation_number > person_num) {
       throw errorHandler("tour is complete", 400);
     }
@@ -23,6 +22,7 @@ exports.getCheckoutSession = async (req, res, next) => {
       cancel_url: `${req.protocol}://${req.get("host")}/payment-failed`,
       client_reference_id: req.params.cartID,
       customer_email: tour.organizer.email,
+      meta_data: req.body,
       line_items: [
         {
           price_data: {
