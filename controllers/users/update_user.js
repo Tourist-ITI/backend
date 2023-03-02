@@ -4,9 +4,10 @@ const { imageMapping } = require("../../utils/utils");
 
 exports.updateUser = async (req, res, next) => {
   try {
+
     const getUser = await userModel.findById(req.params.id);
     if (req.userID !== getUser.id) throw errorHandler("unauthorized", 401);
-
+   
     const handleData = {
       username: req.body.username,
       // photo: req.body.photo,
@@ -16,7 +17,7 @@ exports.updateUser = async (req, res, next) => {
       city: req.body.city,
     };
     const user = new userModel(handleData);
-    await userModel.create(handleData);
+    await userModel.updateOne(handleData);
     successHandler(res, user, "user updated successfully");
   } catch (err) {
     next(err);

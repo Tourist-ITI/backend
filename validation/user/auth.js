@@ -4,7 +4,7 @@ const joi = require("joi");
 const { errorHandler } = require("../../utils/responseHandler");
 
 const signupSchema = joi.object({
-  username: joi.string().alphanum().min(3).required(),
+  username: joi.string().min(3).required(),
   email: joi.string().email().required(),
   phone: joi.string().min(11).required(),
   password: joi.string().required().min(6),
@@ -27,7 +27,12 @@ const signupValid = async (req, res, next) => {
     await signupSchema.validateAsync(req.body);
     next();
   } catch (err) {
-    next(errorHandler(err.details.map((err) => err.message)), 400);
+    next(
+      errorHandler(
+        err.details.map((err) => err.message),
+        400
+      )
+    );
   }
 };
 
@@ -36,7 +41,12 @@ const signinValid = async (req, res, next) => {
     await signinScehma.validateAsync(req.body);
     next();
   } catch (err) {
-    next(errorHandler(err.details.map((err) => err.message)), 400);
+    next(
+      errorHandler(
+        err.details.map((err) => err.message),
+        400
+      )
+    );
   }
 };
 

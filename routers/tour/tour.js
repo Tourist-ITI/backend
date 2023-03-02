@@ -10,6 +10,7 @@ const { updateTour } = require("../../controllers/tour/update_tour");
 //controllers
 const {
   uploadMultiImages,
+  resizeTourImage,
 } = require("../../middlewares/upload-img/upload-img");
 const { validTour } = require("../../validation/user/tour");
 
@@ -22,7 +23,9 @@ tourRouter.post(
     { name: "photos", maxCount: 4 },
     { name: "expected_photos", maxCount: 4 },
   ]),
+
   validTour,
+  resizeTourImage,
   createTour
 );
 tourRouter.put(
