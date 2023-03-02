@@ -17,10 +17,10 @@ const CartSchema = new Schema({
     type: Number,
     default: 0,
   },
-  modifiedOn: {
+  created_at: {
     type: Date,
-    default: Date.now
-  }
+    default: Date.now(),
+  },
 });
 
 module.exports = CartSchema;
