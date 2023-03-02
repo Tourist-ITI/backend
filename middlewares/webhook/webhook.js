@@ -18,7 +18,9 @@ exports.webhookCheckout = async (req, res, next) => {
       return res.status(400).send(`Webhook Error: ${err.message}`);
     }
     console.log(event);
-    if (event.type === "checkout.session.completed") {
+    if (event.object === "checkout.session") {
+      //event.client_reference_id
+      //event.customer_email
       console.log("handle order here");
     }
   } catch (err) {
