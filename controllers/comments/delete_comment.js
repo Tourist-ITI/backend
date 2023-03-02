@@ -17,7 +17,7 @@ exports.deleteOneComment = async (req, res, next) => {
     if (comment.user.id !== req.userID && tour.organizer !== req.userID) {
       throw errorHandler("unauthorized", 401);
     }
-    await Comment.deleteOne({ id: req.params.id });
+    await Comment.findByIdAndRemove(req.params.id);
 
     successHandler(res, comment, "comment deleted successfully");
   } catch (err) {
