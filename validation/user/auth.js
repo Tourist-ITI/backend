@@ -27,7 +27,12 @@ const signupValid = async (req, res, next) => {
     await signupSchema.validateAsync(req.body);
     next();
   } catch (err) {
-    next(errorHandler(err.details.map((err) => err.message)), 400);
+    next(
+      errorHandler(
+        err.details.map((err) => err.message),
+        400
+      )
+    );
   }
 };
 
@@ -36,7 +41,12 @@ const signinValid = async (req, res, next) => {
     await signinScehma.validateAsync(req.body);
     next();
   } catch (err) {
-    next(errorHandler(err.details.map((err) => err.message)), 400);
+    next(
+      errorHandler(
+        err.details.map((err) => err.message),
+        400
+      )
+    );
   }
 };
 
