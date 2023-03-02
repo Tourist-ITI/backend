@@ -3,6 +3,7 @@ const { protect } = require("../../controllers/auth/auth");
 
 const { createTour } = require("../../controllers/tour/create_tour");
 const { deleteOneTour } = require("../../controllers/tour/delete_one");
+const { getAdminTours } = require("../../controllers/tour/getAdminTours");
 
 const { getAllTours } = require("../../controllers/tour/get_all");
 const { getOneTour } = require("../../controllers/tour/get_one");
@@ -41,5 +42,6 @@ tourRouter.put(
 tourRouter.delete("/:id", protect, deleteOneTour);
 tourRouter.get("/:id", getOneTour);
 tourRouter.get("/", getAllTours);
+tourRouter.get("/organizer/:organizerID", getAdminTours);
 
 module.exports = tourRouter;

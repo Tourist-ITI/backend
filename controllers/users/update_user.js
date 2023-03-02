@@ -17,7 +17,7 @@ exports.updateUser = async (req, res, next) => {
       city: req.body.city,
     };
     const user = new userModel(handleData);
-    await userModel.create(handleData);
+    await userModel.updateOne(handleData);
     successHandler(res, user, "user updated successfully");
   } catch (err) {
     next(err);
