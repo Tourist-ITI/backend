@@ -18,6 +18,7 @@ const bookingRouter = require("./routers/booking/booking");
 //const cartRouter = require("./routers/cart/cart");
 
 const { errorHandler } = require("./utils/responseHandler");
+const { webhookCheckout } = require("./middlewares/webhook/webhook");
 
 //handle dotenv
 dotenv.config();
@@ -44,6 +45,13 @@ app.use("/v1/comments", commentsRouter);
 //app.use("/v1/cart", cartRouter);
 
 app.use("/v1", bookingRouter);
+
+//checkout webhook
+app.post(
+  "/webhook-checkout",
+  express.raw({ type: "application/json" }),
+  webhookCheckout
+);
 
 // route not exist
 app.all("*", (req, res, next) => {

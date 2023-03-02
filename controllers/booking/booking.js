@@ -6,21 +6,23 @@ const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
 exports.getCheckoutSession = async (req, res, next) => {
   try {
-    const { tourID } = req.params;
+    const { cartID } = req.params;
     const { person_num } = req.body;
-    const tour = await tourModel.findById(tourID).populate("organizer");
+    const tour = await tourModel.findById(cartID).populate("organizer");
     if (!tour) {
-      throw errorHandler("tour id not found");
+      throw errorHandler("tour id not found", 400);
     }
-
+    console.log("xxxxxxxxxxxxxxxxxxxxxxxxxxx", tour);
     if (tour.person_num - tour.reservation_number > person_num) {
-      throw errorHandler("tour is complete");
+      throw errorHandler("tour is complete", 400);
     }
 
     const session = await stripe.checkout.sessions.create({
       mode: "payment",
       success_url: `${req.protocol}://${req.get("host")}/payment-success`,
       cancel_url: `${req.protocol}://${req.get("host")}/payment-failed`,
+      client_reference_id: req.params.cartID,
+      customer_email: tour.organizer.email,
       line_items: [
         {
           price_data: {
