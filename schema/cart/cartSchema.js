@@ -3,10 +3,6 @@ const mongoose = require("mongoose");
 const { Schema } = mongoose;
 
 const CartSchema = new Schema({
-  active: {
-    type: Boolean,
-    default:true
-  },
   user: {
     type: Schema.Types.ObjectId,
     ref: "User",
