@@ -26,10 +26,10 @@ const userSchema = new Schema(
     },
     ssn: String,
     photo: {
-      type: String,
-      default: "",
+      type: Array,
+      default: null,
     },
-    cover_photo: String,
+    cover_photo: Array,
     role: {
       type: String,
     },

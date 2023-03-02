@@ -12,7 +12,7 @@ const {
 const userRouter = express.Router();
 
 userRouter.get("/:id", getOneUser);
-userRouter.put(
+userRouter.patch(
   "/:id",
   uploadMultiImages([
     { name: "photo", maxCount: 1 },

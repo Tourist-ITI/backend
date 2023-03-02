@@ -55,7 +55,7 @@ const protect = async (req, res, next) => {
 const isAdmin = async (id) => {
   const user = await userModel.findById(id);
   if (user.role !== "admin") {
-    throw errorHandler("admins only can create tour");
+    throw errorHandler("admins only can create tour", 400);
   }
 };
 

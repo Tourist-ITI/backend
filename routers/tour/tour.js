@@ -24,7 +24,6 @@ tourRouter.post(
     { name: "photos", maxCount: 4 },
     { name: "expected_photos", maxCount: 4 },
   ]),
-
   validTour,
   resizeTourImage,
   createTour
@@ -39,6 +38,7 @@ tourRouter.put(
   validTour,
   updateTour
 );
+
 tourRouter.delete("/:id", protect, deleteOneTour);
 tourRouter.get("/:id", getOneTour);
 tourRouter.get("/", getAllTours);

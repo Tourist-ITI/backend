@@ -41,7 +41,7 @@ exports.uploadSingleImage = (image) => upload.single(image);
 //upload multiple image
 exports.uploadMultiImages = (arrayOfFields) => upload.fields(arrayOfFields);
 
-const sharpHandler = async (buffer, id) => {
+exports.sharpHandler = async (buffer, id) => {
   const uniqueNumber = Date.now();
   await sharp(buffer)
     .resize({

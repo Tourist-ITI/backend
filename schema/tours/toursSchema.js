@@ -59,7 +59,6 @@ const tourSchema = new Schema(
     },
 
     comments: [{ type: Schema.Types.ObjectId, ref: "Comment" }],
-
   },
   {
     toJSON: { virtual: true },
