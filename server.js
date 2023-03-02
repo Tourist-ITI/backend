@@ -15,7 +15,7 @@ const userRouter = require("./routers/user/user");
 const tourRouter = require("./routers/tour/tour");
 const commentsRouter = require("./routers/comment/comment");
 const bookingRouter = require("./routers/booking/booking");
-//const cartRouter = require("./routers/cart/cart");
+const cartRouter = require("./routers/cart/cart");
 
 const { errorHandler } = require("./utils/responseHandler");
 const { webhookCheckout } = require("./middlewares/webhook/webhook");
@@ -42,7 +42,7 @@ app.use("/v1/users", authRouter);
 app.use("/v1/tours", tourRouter);
 app.use("/v1/user/profile", userRouter);
 app.use("/v1/comments", commentsRouter);
-//app.use("/v1/cart", cartRouter);
+app.use("/v1/cart", cartRouter);
 
 app.use("/v1", bookingRouter);
 

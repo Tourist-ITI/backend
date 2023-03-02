@@ -1,11 +1,9 @@
 const { commentModel: Comment, tourModel } = require("../../models/index");
 const { errorHandler, successHandler } = require("../../utils/responseHandler");
 
-const { isAdmin } = require("../auth/auth");
 
 exports.createComment = async (req, res, next) => {
   try {
-    //    await isAdmin(req.userID);
     const { tourId } = req.params;
 
     const tour = await tourModel.findById(tourId);
@@ -24,13 +22,12 @@ exports.createComment = async (req, res, next) => {
 
     await Comment.create(handleData);
 
-    // const commentsArr = tour.comments;
+    const commentsArr = tour.comments;
 
-    // await tourModel.updateOne(
-    //   { id: tourId },
-    //   { comments: commentsArr.push(comment.id) }
-    // );
-    // console.log(tour);
+    await tourModel.updateOne(
+      { id: tourId },
+      { comments: commentsArr.push(comment.id) }
+    );
 
     successHandler(res, comment, "comment created successfully");
   } catch (err) {
