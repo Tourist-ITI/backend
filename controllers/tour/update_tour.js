@@ -9,18 +9,17 @@ exports.updateTour = async (req, res, next) => {
     const { expected_photos, photos } = req.files;
     const { id } = req.params;
 
-    const getTour = await tourModel.findOne({id});
+    const getTour = await tourModel.findOne({id}).populate("organizer");
     if (!getTour) {
       throw errorHandler("invalid tour id", 404);
     }
-    const user = await userModel.findOne({id: getTour?.organizer});
+    const user = await userModel.findOne({_id: req.userID});
 
-    console.log(user,req.userID,user.id);
-    if (!user || req.userID !== user.id)
-      throw errorHandler("unauthorized", 401);
-
+    console.log(getTour,user);
     await isAdmin(req.userID);
-
+    if(getTour.organizer.id !== req.userID){
+      throw errorHandler("unauthorized",401);
+    }
     const handleData = {
       ...req.body,
       photos: await cloudUploadImages(photos),
