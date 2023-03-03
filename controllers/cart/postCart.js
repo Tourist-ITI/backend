@@ -6,9 +6,7 @@ exports.addToCart = async (req, res, next) => {
     const { tourID } = req.params;
     const { subscriber_number } = req.body;
     const tour = await tourModel.findById(tourID);
-
     const cart = await CartModel.findOne({ user: req.userID });
-
     if (!tour) {
       throw errorHandler("tour is not found", 400);
     }

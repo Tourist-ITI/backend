@@ -10,9 +10,9 @@ exports.updateUser = async (req, res, next) => {
   try {
     const getUser = await userModel.findById(req.userID);
 
-    if (getUser.id !== req.userID) {
-      throw errorHandler("unauthorized", 401);
-    }
+    // if (getUser.id !== req.userID) {
+    //   throw errorHandler("unauthorized", 401);
+    // }
 
     const photoFile = await sharpHandler(req.files.photo[0].buffer, req.userID);
     const coverFile = await sharpHandler(
@@ -32,7 +32,7 @@ exports.updateUser = async (req, res, next) => {
       city: req.body.city,
     };
     const user = new userModel(handleData);
-    await userModel.updateOne(handleData);
+    await userModel.findByIdAndUpdate(req.userID,handleData);
     successHandler(res, user, "user updated successfully");
   } catch (err) {
     next(err);

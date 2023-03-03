@@ -23,7 +23,7 @@ exports.updateComment = async (req, res, next) => {
     };
     const editedComment = new Comment(handleData);
 
-    await Comment.updateOne({ id: req.params.commentID }, handleData);
+    await Comment.findByIdAndUpdate(req.params.commentID , handleData);
 
     successHandler(res, editedComment, "comment updated successfully");
   } catch (err) {

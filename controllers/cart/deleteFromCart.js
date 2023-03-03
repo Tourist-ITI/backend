@@ -4,8 +4,7 @@ const { errorHandler, successHandler } = require("../../utils/responseHandler");
 exports.deleteFromCart = async (req, res, next) => {
     try {
       const { tourID } = req.params.tourID;
-      const { userID } = req.params.userID;
-      const cart = await CartModel.findOne(userID);
+      const cart = await CartModel.findById(req.userID);
       console.log(req.params.tourID);
       console.log("before filter",cart);
       const result = cart.tours.filter(tID=>tID!==tourID)

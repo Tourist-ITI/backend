@@ -7,6 +7,6 @@ const { addToCart } = require("../../controllers/cart/postCart");
 const cartRouter = express.Router();
 
 cartRouter.post("/:tourID", protect, addToCart);
-cartRouter.delete("/:tourID/:userID", deleteFromCart);
+cartRouter.delete("/:tourID",protect, deleteFromCart);
 
 module.exports = cartRouter;
