@@ -17,11 +17,11 @@ exports.webhookCheckout = async (req, res, next) => {
     } catch (err) {
       return res.status(400).send(`Webhook Error: ${err.message}`);
     }
-    console.log(event);
-    if (event.object === "checkout.session") {
+
+    if (event.type === "checkout.session.completed") {
       //event.client_reference_id
       //event.customer_email
-      console.log("handle order here");
+      console.log("handle order here", event.data.object);
     }
   } catch (err) {
     next(err);

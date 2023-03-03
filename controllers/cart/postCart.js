@@ -24,7 +24,7 @@ exports.addToCart = async (req, res, next) => {
       await CartModel.create(Cart);
     } else {
       total_money = +subscriber_number * +tour.person_cost + cart.total_money;
-
+      let tours;
       if (!cart.tours.includes(tourID)) {
         tours = [...cart.tours, tourID];
       }
