@@ -36,7 +36,12 @@ const userSchema = new Schema(
     bio: String,
     city: String,
     visited_tours: Array,
-    favorite_tours: Array,
+    favorite_tours:[
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Tour",
+      },
+    ],
     cash: Number,
     currency: String,
     created_at: {
