@@ -1,3 +1,4 @@
+const { cloudUploadImages } = require("../../middlewares/cloudinary/cloudinary");
 const { tourModel, userModel } = require("../../models");
 const { errorHandler, successHandler } = require("../../utils/responseHandler");
 const { imageMapping, stringToArray } = require("../../utils/utils");
@@ -8,12 +9,13 @@ exports.updateTour = async (req, res, next) => {
     const { expected_photos, photos } = req.files;
     const { id } = req.params;
 
-    const getTour = await tourModel.findById(id);
+    const getTour = await tourModel.findOne({id});
     if (!getTour) {
-      throw errorHandler("invalid tour id", 400);
+      throw errorHandler("invalid tour id", 404);
     }
-    const user = await userModel.findById(getTour?.organizer);
+    const user = await userModel.findOne({id: getTour?.organizer});
 
+    console.log(user,req.userID,user.id);
     if (!user || req.userID !== user.id)
       throw errorHandler("unauthorized", 401);
 
@@ -21,10 +23,9 @@ exports.updateTour = async (req, res, next) => {
 
     const handleData = {
       ...req.body,
-      expected_photos: imageMapping(expected_photos),
-      photos: imageMapping(photos),
-      reasons: stringToArray(req.body.reasons),
-      coordinates: stringToArray(req.body.coordinates),
+      photos: await cloudUploadImages(photos),
+      expected_photos: await cloudUploadImages(expected_photos),
+      reasons: req.body.reasons,
       plan: {
         meeting_point: req.body.meeting_point,
         city_highlights: req.body.city_highlights,

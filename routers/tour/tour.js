@@ -36,6 +36,7 @@ tourRouter.put(
     { name: "expected_photos", maxCount: 4 },
   ]),
   validTour,
+  resizeTourImage,
   updateTour
 );
 

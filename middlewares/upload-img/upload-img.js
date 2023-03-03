@@ -24,11 +24,11 @@ exports.resizeTourImage = async (req, res, next) => {
   if (!req.files) next();
 
   req.files.photos = await Promise.all(
-    req.files.photos.map((item) => sharpHandler(item.buffer, req.userID))
+    req.files.photos.map((item) => this.sharpHandler(item.buffer, req.userID))
   );
   req.files.expected_photos = await Promise.all(
     req.files.expected_photos.map((item) =>
-      sharpHandler(item.buffer, req.userID)
+      this.sharpHandler(item.buffer, req.userID)
     )
   );
   next();

@@ -36,6 +36,7 @@ const userSchema = new Schema(
     bio: String,
     city: String,
     visited_tours: Array,
+    favorite_tours: Array,
     cash: Number,
     currency: String,
     created_at: {
