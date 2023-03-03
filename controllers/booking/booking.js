@@ -44,7 +44,3 @@ exports.getCheckoutSession = async (req, res, next) => {
     next(err);
   }
 };
-const CreateOrder = async (id) => {
-  const cart = await CartModel.findById(id).populate("tours").populate("user");
-  await CartModel.remove();
-};

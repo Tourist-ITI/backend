@@ -1,4 +1,5 @@
 const dotenv = require("dotenv");
+const { CartModel } = require("../../models");
 
 dotenv.config();
 
@@ -22,8 +23,12 @@ exports.webhookCheckout = async (req, res, next) => {
       //event.client_reference_id
       //event.customer_email
       console.log("handle order here", event.data.object);
+      CreateOrder(event.data.object.client_reference_id);
     }
   } catch (err) {
     next(err);
   }
+};
+const CreateOrder = async (id) => {
+  await CartModel.findByIdAndRemove(id);
 };

@@ -8,9 +8,11 @@ const { errorHandler, successHandler } = require("../../utils/responseHandler");
 
 exports.updateUser = async (req, res, next) => {
   try {
-    const getUser = await userModel.findById(req.params.id);
-    console.log(req.user, "<<<<<<<<<", getUser);
-    if (req.userID !== getUser.id) throw errorHandler("unauthorized", 401);
+    const getUser = await userModel.findById(req.userID);
+
+    if (getUser.id !== req.userID) {
+      throw errorHandler("unauthorized", 401);
+    }
 
     const photoFile = await sharpHandler(req.files.photo[0].buffer, req.userID);
     const coverFile = await sharpHandler(
