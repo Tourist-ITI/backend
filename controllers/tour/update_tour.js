@@ -36,7 +36,7 @@ exports.updateTour = async (req, res, next) => {
 
     const tour = new tourModel(handleData);
 
-    await tourModel.updateOne({ id }, handleData);
+    await tourModel.findByIdAndUpdate(req.params, handleData);
 
     successHandler(res, tour, "tour updated successfully");
   } catch (err) {
