@@ -58,7 +58,7 @@ const tourSchema = new Schema(
       special_treat: String,
     },
 
-    comments: [{ type: Schema.Types.ObjectId, ref: "Comment" }],
+    // comments: [{ type: Schema.Types.ObjectId, ref: "Comment" }],
   },
   {
     toJSON: { virtual: true },
