@@ -1,4 +1,5 @@
 const dotenv = require("dotenv");
+const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 const { CartModel } = require("../../models");
 
 dotenv.config();
