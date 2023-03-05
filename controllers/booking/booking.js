@@ -15,9 +15,6 @@ exports.getCheckoutSession = async (req, res, next) => {
     if (!cart) {
       throw errorHandler("cart id not found", 400);
     }
-    // if (tour.person_num - tour.reservation_number > person_num) {
-    //   throw errorHandler("tour is complete", 400);
-    // }
 
     const session = await stripe.checkout.sessions.create({
       mode: "payment",
@@ -28,7 +25,7 @@ exports.getCheckoutSession = async (req, res, next) => {
       line_items: [
         {
           price_data: {
-            currency: "EGP",
+            currency: "egp",
             unit_amount: cart.total_money * 100,
             product_data: {
               name: `tours`,
