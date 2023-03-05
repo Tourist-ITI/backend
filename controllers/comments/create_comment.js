@@ -18,9 +18,8 @@ exports.createComment = async (req, res, next) => {
       user: req.userID,
       tour: tourID,
     };
-    const comment = new Comment(handleData);
 
-    await Comment.create(handleData);
+    const comment = await Comment.create(handleData);
 
     successHandler(res, comment, "comment created successfully");
   } catch (err) {

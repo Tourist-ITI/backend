@@ -36,7 +36,7 @@ const userSchema = new Schema(
     bio: String,
     city: String,
     visited_tours: Array,
-    favorite_tours:[
+    favorite_tours: [
       {
         type: Schema.Types.ObjectId,
         ref: "Tour",
@@ -50,6 +50,8 @@ const userSchema = new Schema(
       select: false,
     },
   },
+  { timestamps: true },
+
   {
     toJSON: { virtual: true },
     toObject: { virtual: true },

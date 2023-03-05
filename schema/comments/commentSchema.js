@@ -17,12 +17,9 @@ const commentSchema = new Schema(
       ref: "Tour",
       require: true,
     },
-    created_at: {
-      type: Date,
-      default: Date.now(),
-      select: false,
-    },
   },
+  { timestamps: true },
+
   {
     toJSON: { virtual: true },
     toObject: { virtual: true },

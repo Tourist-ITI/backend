@@ -18,17 +18,17 @@ const { validComment } = require("../../validation/comment");
 
 const commentRouter = express.Router();
 
+//get all comments
+commentRouter.get("/", getAllComments);
 //create comment
 commentRouter.post("/:tourID", protect, validComment, createComment);
 //update comment
 commentRouter.put("/:commentID", protect, validComment, updateComment);
 //delete comment
 commentRouter.delete("/:commentID", protect, deleteOneComment);
-//get user comments
-commentRouter.get("/:userID", getUserComments);
 //get tour comments
-commentRouter.get("/:tourID", getTourComments);
-//get all comments
-commentRouter.get("/", getAllComments);
+commentRouter.get("/tour/:tourID", getTourComments);
+//get user comments
+commentRouter.get("/user/:userID", getUserComments);
 
 module.exports = commentRouter;

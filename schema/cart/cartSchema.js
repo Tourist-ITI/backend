@@ -2,25 +2,28 @@ const mongoose = require("mongoose");
 
 const { Schema } = mongoose;
 
-const CartSchema = new Schema({
-  user: {
-    type: Schema.Types.ObjectId,
-    ref: "User",
-  },
-  tours: [
-    {
+const CartSchema = new Schema(
+  {
+    user: {
       type: Schema.Types.ObjectId,
-      ref: "Tour",
+      ref: "User",
     },
-  ],
-  total_money: {
-    type: Number,
-    default: 0,
+    tours: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Tour",
+      },
+    ],
+    total_money: {
+      type: Number,
+      default: 0,
+    },
+    created_at: {
+      type: Date,
+      default: Date.now(),
+    },
   },
-  created_at: {
-    type: Date,
-    default: Date.now(),
-  },
-});
+  { timestamps: true }
+);
 
 module.exports = CartSchema;

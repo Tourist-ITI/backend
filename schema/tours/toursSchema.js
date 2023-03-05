@@ -1,5 +1,6 @@
 // core module
 const mongoose = require("mongoose");
+const { post } = require("../user/userSchema");
 
 const { Schema } = mongoose;
 
@@ -58,16 +59,18 @@ const tourSchema = new Schema(
       special_treat: String,
     },
   },
+  { timestamps: true },
   {
-    toJSON: { virtual: true },
-    toObject: { virtual: true },
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true },
   }
 );
 
-tourSchema.virtual("rating", {
+tourSchema.virtual("rate", {
   ref: "Comment",
   foreignField: "tour",
   localField: "_id",
 });
 
+tourSchema.statics.calcRate = () => {};
 module.exports = tourSchema;
