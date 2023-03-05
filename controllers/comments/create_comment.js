@@ -3,19 +3,20 @@ const { errorHandler, successHandler } = require("../../utils/responseHandler");
 
 exports.createComment = async (req, res, next) => {
   try {
-    const { tourId } = req.params;
+    const { tourID } = req.params;
 
-    const tour = await tourModel.findById(tourId);
-    console.log("tour", tourId);
+    const tour = await tourModel.findById(tourID);
+
     if (!tour) {
       throw errorHandler("tour not found", 404);
     }
+
     const handleData = {
       title: req.body.title,
       content: req.body.content,
       rating: +req.body.rating,
       user: req.userID,
-      tour: tourId,
+      tour: tourID,
     };
     const comment = new Comment(handleData);
 

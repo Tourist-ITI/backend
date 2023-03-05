@@ -13,7 +13,7 @@ const {
   uploadMultiImages,
   resizeTourImage,
 } = require("../../middlewares/upload-img/upload-img");
-const { validTour } = require("../../validation/user/tour");
+const { validTour } = require("../../validation/tour");
 
 const tourRouter = express.Router();
 

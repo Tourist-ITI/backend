@@ -1,5 +1,5 @@
 const joi = require("joi");
-const { errorHandler } = require("../../utils/responseHandler");
+const { errorHandler } = require("../utils/responseHandler");
 
 const tourSchema = joi.object({
   title: joi.string().required(),
