@@ -16,7 +16,7 @@ const tourRouter = require("./routers/tour/tour");
 const commentsRouter = require("./routers/comment/comment");
 const bookingRouter = require("./routers/booking/booking");
 const cartRouter = require("./routers/cart/cart");
-const favoritesRouter = require("./routers/favorite/favorite")
+const favoritesRouter = require("./routers/favorite/favorite");
 
 const { errorHandler } = require("./utils/responseHandler");
 const { webhookCheckout } = require("./middlewares/webhook/webhook");
@@ -31,6 +31,14 @@ const app = express();
 //middleware
 // cors
 app.use(cors());
+
+//checkout webhook
+app.post(
+  "/webhook-checkout",
+  express.raw({ type: "application/json" }),
+  webhookCheckout
+);
+
 //body parser
 app.use(express.json());
 
@@ -46,13 +54,6 @@ app.use("/v1/comments", commentsRouter);
 app.use("/v1/cart", cartRouter);
 app.use("/v1/favorites", favoritesRouter);
 app.use("/v1", bookingRouter);
-
-//checkout webhook
-app.post(
-  "/webhook-checkout",
-  express.raw({ type: "application/json" }),
-  webhookCheckout
-);
 
 // route not exist
 app.all("*", (req, res, next) => {

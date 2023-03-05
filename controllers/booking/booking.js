@@ -32,6 +32,7 @@ exports.getCheckoutSession = async (req, res, next) => {
             unit_amount: cart.total_money * 100,
             product_data: {
               name: `tours`,
+              description: "welcome in Travel ",
             },
           },
           quantity: cart.tours.length,
