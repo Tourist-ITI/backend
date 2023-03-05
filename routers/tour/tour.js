@@ -31,10 +31,13 @@ tourRouter.post(
 tourRouter.put(
   "/:id",
   protect,
-  uploadMultiImages([
-    { name: "photos", maxCount: 4 },
-    { name: "expected_photos", maxCount: 4 },
-  ]),
+  uploadMultiImages(
+    [
+      { name: "photos", maxCount: 4 },
+      { name: "expected_photos", maxCount: 4 },
+    ],
+    true
+  ),
   validTour,
   resizeTourImage,
   updateTour

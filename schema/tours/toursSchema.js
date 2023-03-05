@@ -57,8 +57,6 @@ const tourSchema = new Schema(
       magical_storytelling: String,
       special_treat: String,
     },
-
-    // comments: [{ type: Schema.Types.ObjectId, ref: "Comment" }],
   },
   {
     toJSON: { virtual: true },
@@ -66,9 +64,9 @@ const tourSchema = new Schema(
   }
 );
 
-tourSchema.virtual("rate", {
-  ref: "Comments",
-  foreignField: "comment_id",
+tourSchema.virtual("rating", {
+  ref: "Comment",
+  foreignField: "tour",
   localField: "_id",
 });
 

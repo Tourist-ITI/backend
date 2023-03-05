@@ -4,7 +4,7 @@ const { errorHandler } = require("../utils/responseHandler");
 const CommentSchema = joi.object({
   title: joi.string().required(),
   content: joi.string().required(),
-  rate: joi.number().min(1).max(5).required(),
+  rating: joi.number().min(1).max(5).required(),
 });
 
 const validComment = async (req, res, next) => {

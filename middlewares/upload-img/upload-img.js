@@ -21,16 +21,16 @@ const fileFilter = (req, file, cd) => {
 };
 
 exports.resizeTourImage = async (req, res, next) => {
-  if (!req.files) next();
-
-  req.files.photos = await Promise.all(
-    req.files.photos.map((item) => this.sharpHandler(item.buffer, req.userID))
-  );
-  req.files.expected_photos = await Promise.all(
-    req.files.expected_photos.map((item) =>
-      this.sharpHandler(item.buffer, req.userID)
-    )
-  );
+  if (req.files.photos)
+    req.files.photos = await Promise.all(
+      req.files.photos.map((item) => this.sharpHandler(item.buffer, req.userID))
+    );
+  if (req.files.expected_photos)
+    req.files.expected_photos = await Promise.all(
+      req.files.expected_photos.map((item) =>
+        this.sharpHandler(item.buffer, req.userID)
+      )
+    );
   next();
 };
 
@@ -39,7 +39,12 @@ const upload = multer({ storage: multerStorage, fileFilter });
 exports.uploadSingleImage = (image) => upload.single(image);
 
 //upload multiple image
-exports.uploadMultiImages = (arrayOfFields) => upload.fields(arrayOfFields);
+exports.uploadMultiImages = (arrayOfFields, edit = false) => {
+  if (arrayOfFields.length === 0 && !edit) {
+    throw errorHandler("require images ", 400);
+  }
+  return upload.fields(arrayOfFields);
+};
 
 exports.sharpHandler = async (buffer, id) => {
   const uniqueNumber = Date.now();

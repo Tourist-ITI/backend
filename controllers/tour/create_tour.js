@@ -8,16 +8,25 @@ const { isAdmin } = require("../auth/auth");
 
 exports.createTour = async (req, res, next) => {
   try {
-    const { expected_photos, photos } = req.files;
-
-    console.log(expected_photos, photos);
+    let { expected_photos, photos } = req.files;
 
     await isAdmin(req.userID);
 
+    if (!photos) {
+      throw errorHandler("photos is required", 400);
+    }
+
+    if (!expected_photos) {
+      throw errorHandler("expected photos is required", 400);
+    }
+
+    photos = await cloudUploadImages(photos);
+    expected_photos = await cloudUploadImages(expected_photos);
+
     const handleData = {
       ...req.body,
-      photos: await cloudUploadImages(photos),
-      expected_photos: await cloudUploadImages(expected_photos),
+      photos,
+      expected_photos,
       organizer: req.userID,
       reasons: req.body.reasons,
       plan: {
@@ -29,10 +38,7 @@ exports.createTour = async (req, res, next) => {
       },
     };
 
-    const tour = new tourModel(handleData);
-
-    await tourModel.create(handleData);
-
+    const tour = await tourModel.create(handleData);
     successHandler(res, tour, "tour created successfully");
   } catch (err) {
     next(err);
