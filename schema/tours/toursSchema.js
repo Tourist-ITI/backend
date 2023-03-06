@@ -66,11 +66,4 @@ const tourSchema = new Schema(
   }
 );
 
-tourSchema.virtual("rate", {
-  ref: "Comment",
-  foreignField: "tour",
-  localField: "_id",
-});
-
-tourSchema.statics.calcRate = () => {};
 module.exports = tourSchema;
