@@ -4,6 +4,7 @@ const {
   commentModel,
 } = require("../../models");
 const { successHandler, errorHandler } = require("../../utils/responseHandler");
+const { calcRate } = require("./helper");
 
 exports.getOneTour = async (req, res, next) => {
   try {
@@ -13,10 +14,10 @@ exports.getOneTour = async (req, res, next) => {
       throw errorHandler("tour not found", 404);
     }
     const comments = await commentModel.find({ tour: req.params.id });
+
     let rate;
     if (comments) {
-      sumRates = comments.reduce((acc, item) => acc + item.rating, 0);
-      rate = Math.round(sumRates / comments.length);
+      rate = calcRate(comments);
     }
 
     successHandler(res, { tour, rate });

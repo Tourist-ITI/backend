@@ -1,17 +1,22 @@
-const { tourModel: Tour } = require("../../models");
+const { tourModel: Tour, commentModel } = require("../../models");
 const { successHandler, errorHandler } = require("../../utils/responseHandler");
+const { calcRate } = require("./helper");
 
 exports.getAllTours = async (req, res, next) => {
   try {
-    const { location, all } = req.query;
+    const { location, all, limit } = req.query;
 
     let tours;
-    if (!location) {
-      tours = await Tour.find().populate("organizer");
-    } else tours = await Tour.find({ location }).populate("organizer");
+    if (!location && limit) {
+      tours = await Tour.find().limit(+limit).populate("organizer");
+    } else if (location && limit) {
+      tours = await Tour.find({ location }).limit(+limit).populate("organizer");
+    } else if (location && !limit) {
+      tours = await Tour.find({ location }).populate("organizer");
+    }
 
     if (!tours) {
-      throw errorHandler();
+      throw errorHandler("tours not found", 400);
     }
 
     if (all) {
