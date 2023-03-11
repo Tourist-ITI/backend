@@ -13,6 +13,8 @@ exports.getAllTours = async (req, res, next) => {
       tours = await Tour.find({ location }).limit(+limit).populate("organizer");
     } else if (location && !limit) {
       tours = await Tour.find({ location }).populate("organizer");
+    } else {
+      tours = await Tour.find().populate("organizer");
     }
 
     if (!tours) {
