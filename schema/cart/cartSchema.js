@@ -1,3 +1,4 @@
+const { number } = require("joi");
 const mongoose = require("mongoose");
 
 const { Schema } = mongoose;
@@ -14,6 +15,7 @@ const CartSchema = new Schema(
         ref: "Tour",
       },
     ],
+    tour_details: Array,
     total_money: {
       type: Number,
       default: 0,

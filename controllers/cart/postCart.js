@@ -10,27 +10,42 @@ exports.addToCart = async (req, res, next) => {
     if (!tour) {
       throw errorHandler("tour is not found", 400);
     }
-    let total_money;
+    let total_money, createdCart, newCart;
     if (!cart) {
       total_money = +subscriber_number * +tour.person_cost;
       const Cart = new CartModel({
         user: req.userID,
         tours: tourID,
         total_money,
+        tour_details: { tour_id: tourID, money: total_money },
       });
 
-      await CartModel.create(Cart);
+      createdCart = await CartModel.create(Cart);
     } else {
       total_money = +subscriber_number * +tour.person_cost + cart.total_money;
       let tours;
       if (!cart.tours.includes(tourID)) {
         tours = [...cart.tours, tourID];
+      } else {
+        throw errorHandler("tour is already in cart", 400);
       }
-      await CartModel.findByIdAndUpdate(cart.id, { total_money, tours });
+      await CartModel.findByIdAndUpdate(cart.id, {
+        total_money,
+        tours,
+        tour_details: [
+          ...cart.tour_details,
+          { tour_id: tourID, money: +subscriber_number * +tour.person_cost },
+        ],
+      });
     }
-    successHandler(res, cart, "cart created successfully");
+    newCart = await CartModel.findById(cart.id);
+    successHandler(
+      res,
+      newCart ? newCart : createdCart,
+      "cart created successfully"
+    );
   } catch (err) {
     console.log(err);
-    res.status(500).send("Something went wrong");
+    next(err);
   }
 };

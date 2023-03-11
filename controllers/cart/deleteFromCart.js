@@ -2,19 +2,48 @@ const { CartModel, tourModel } = require("../../models/index");
 const { errorHandler, successHandler } = require("../../utils/responseHandler");
 
 exports.deleteFromCart = async (req, res, next) => {
-    try {
-      const { tourID } = req.params.tourID;
-      const cart = await CartModel.findById(req.userID);
-      console.log(req.params.tourID);
-      console.log("before filter",cart);
-      const result = cart.tours.filter(tID=>tID!==tourID)
-
-      console.log("after filter",result);
-    //   await CartModel.create(Cart);
-
-      successHandler(res, cart, "cart created successfully");
-    } catch (err) {
-      console.log(err);
-      res.status(500).send("Something went wrong");
+  try {
+    const { tourID } = req.params;
+    // const { subscriber_number } = req.body;
+    const tour = await tourModel.findById(tourID);
+    const cart = await CartModel.findOne({ user: req.userID });
+    if (!tour) {
+      throw errorHandler("tour is not found", 400);
     }
+    if (!cart) {
+      throw errorHandler("cart is not found", 400);
+    }
+    const handleCart = deleteFromCart(cart, tourID);
+
+    if (!handleCart.tours.includes(tourID)) {
+      throw errorHandler("tour is not found", 400);
+    }
+    await CartModel.findByIdAndUpdate(cart.id, {
+      ...handleCart,
+    });
+    const newCart = await CartModel.findById(cart.id);
+    successHandler(res, newCart, "item removed from cart successfully");
+  } catch (err) {
+    next(err);
+  }
+};
+
+const deleteFromCart = (cart, tourID) => {
+  const newTours = cart.tours.filter(
+    (item) => parseInt(item) !== parseInt(tourID)
+  );
+
+  const newToursDetails = cart.tour_details.filter(
+    (item) => item.tour_id !== tourID
+  );
+  const totalMoney = cart.newToursDetails?.reduce(
+    (acc, item) => acc + item.money,
+    0
+  );
+
+  return {
+    tours: newTours,
+    tour_details: newToursDetails,
+    total_money: totalMoney ?? 0,
   };
+};
