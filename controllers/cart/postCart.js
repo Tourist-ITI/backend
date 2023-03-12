@@ -24,11 +24,9 @@ exports.addToCart = async (req, res, next) => {
     } else {
       total_money = +subscriber_number * +tour.person_cost + cart.total_money;
       let tours;
-      if (!cart.tours.includes(tourID)) {
-        tours = [...cart.tours, tourID];
-      } else {
-        throw errorHandler("tour is already in cart", 400);
-      }
+
+      tours = [...cart.tours, tourID];
+
       await CartModel.findByIdAndUpdate(cart.id, {
         total_money,
         tours,
