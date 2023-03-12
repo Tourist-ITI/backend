@@ -4,20 +4,20 @@ const { errorHandler, successHandler } = require("../../utils/responseHandler");
 exports.deleteFromCart = async (req, res, next) => {
   try {
     const { tourID } = req.params;
-    // const { subscriber_number } = req.body;
     const tour = await tourModel.findById(tourID);
     const cart = await CartModel.findOne({ user: req.userID });
+
     if (!tour) {
-      throw errorHandler("tour is not found", 400);
+      throw errorHandler("tour is not found ", 400);
     }
     if (!cart) {
       throw errorHandler("cart is not found", 400);
     }
     const handleCart = deleteFromCart(cart, tourID);
-
-    if (!handleCart.tours.includes(tourID)) {
-      throw errorHandler("tour is not found", 400);
-    }
+    console.log(handleCart.tours[0]);
+    // if (!handleCart.tours.includes(tourID)) {
+    //   throw errorHandler("tour is not found", 400);
+    // }
     await CartModel.findByIdAndUpdate(cart.id, {
       ...handleCart,
     });
