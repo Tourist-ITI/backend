@@ -4,23 +4,25 @@ const { errorHandler, successHandler } = require("../../utils/responseHandler");
 
 exports.deleteFromFavorites = async (req, res, next) =>{
     try {
-        console.log(req.params);
-        const { tourId } = req.params;
-        const { userId } = req.body;
-        const tour = await tourModel.findOne(tourId);
-        const user = await userModel.findOne(userId);
+        const { tourID } = req.params;
+        const tour = await tourModel.findById(tourID);
+        const user = await userModel.findById(req.userID);
         console.log(tour,user);
         if (!tour) {
             throw errorHandler("tour not found", 404);
           }
-
-          const favoritesArr = user.favorite_tours;
-          const result = favoritesArr.filter(tId=> favoritesArr[tId] !== favoritesArr[tourId] )
-          await userModel.updateOne(
+          if (!user) {
+            throw errorHandler("user not found", 404);
+          }
+          let favoritesArr = [...user.favorite_tours];
+          const result = favoritesArr.filter(
+            (item) => parseInt(item) !== parseInt(tourID)
+          );
+          await userModel.findByIdAndUpdate(req.userID,
             { favorite_tours: result }
           );
-        
-        successHandler(res, user.favorite_tours, "tour was removed from favorites successfully");
+          const updatedUser = await userModel.findById(req.userID);
+        successHandler(res, updatedUser, "tour was removed from favorites successfully");
     } catch (err) {
         next(err);
     }
