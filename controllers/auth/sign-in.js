@@ -9,7 +9,7 @@ const signIn = async (req, res, next) => {
 
     // check if user exist
     const user = await userModel.findOne({ email }).select("password");
-    const userBody = await userModel.findOne({ email });
+    const userBody = await userModel.findOne({ email }).populate("favorite_tours");
     if (!user) {
       throw errorHandler("user not found please sign up", 404);
     }

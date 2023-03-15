@@ -5,7 +5,7 @@ exports.getOneUser = async (req, res, next) => {
 
     const user = await userModel
       .findOne({ _id: req.params.id })
-      .populate("cart");
+      .populate("favorite_tours");
       console.log(user.id);
       console.log( req.params.id );
     if (!user) {
