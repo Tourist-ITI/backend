@@ -27,7 +27,7 @@ exports.getAllTours = async (req, res, next) => {
       tours = [...set];
     }
 
-    successHandler(res, tours);
+    successHandler(res, tours, tours.length);
   } catch (err) {
     next(err);
   }

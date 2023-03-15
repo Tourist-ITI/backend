@@ -17,7 +17,7 @@ exports.getAdminTours = async (req, res, next) => {
       .find({ organizer: organizerID })
       .populate("organizer");
 
-    successHandler(res, tours);
+    successHandler(res, tours, tours.length);
   } catch (err) {
     next(err);
   }

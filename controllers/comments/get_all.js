@@ -7,7 +7,7 @@ exports.getAllComments = async (req, res, next) => {
     if (!comments) {
       throw errorHandler("Comments not found", 404);
     }
-    successHandler(res, comments);
+    successHandler(res, comments, comments.length);
   } catch (err) {
     next(err);
   }

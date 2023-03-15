@@ -13,11 +13,13 @@ function errorHandler(error = "Something went wrong", status = 500) {
 function successHandler(
   res,
   data = [],
+  length = undefined,
   message = "Data retrieved successfully",
   status = 200
 ) {
   res.status(status).json({
     success: true,
+    length,
     message,
     data,
   });
